@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Walking JS Queue</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            background: white;
+        }
+        section{
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .box-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        .box{
+            width: auto;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+
+
+        }
+        .box img{
+            width: 100px;
+            height: 100px;
+        }
+        .box h1{
+            margin: 0;
+            padding: 0;
+            font-size: 2rem;
+        }
+        .box-building{
+            width: auto;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 90px;
+        }
+        .box-building img{
+            width: 300px;
+            height: 300px;
+        }
+        #btn-panel{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 100px;
+        }
+        #btnStart{
+            background: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        #btnEnd{
+            background: #f44336;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+<section>
+    <div class="box-container">
+        <div class="box">
+            <img src="assets/walking.gif" alt="walking">
+            <h1 id="val1">A</h1>
+        </div>
+        <div class="box">
+            <img src="assets/walking.gif" alt="walking">
+            <h1 id="val2">B</h1>
+        </div>
+        <div class="box">
+            <img src="assets/walking.gif" alt="walking">
+            <h1 id="val3">C</h1>
+        </div>
+        <div class="box">
+            <img src="assets/walking.gif" alt="walking">
+            <h1 id="val4">D</h1>
+        </div>
+        <div class="box">
+            <img src="assets/walking.gif" alt="walking">
+            <h1 id="val5">E</h1>
+        </div>
+        <div class="box">
+            <img src="assets/walking.gif" alt="walking">
+            <h1 id="val6">F</h1>
+        </div>
+        <div class="box-building">
+            <img src="assets/building.gif" alt="Building">
+        </div>
+    </div>
+</section>
+<section id="btn-panel">
+    <button type="button" id="btnStart">Start</button>
+    <button type="button" id="btnEnd">End</button>
+</section>
+
+<script>
+    const data = ["A", "B", "C", "D", "E", "F"];
+    const letterElements = document.querySelectorAll(".box h1");
+    let intervalId;
+
+    const updateLetters = () => {
+        const last = data.pop();
+        data.unshift(last);
+
+        letterElements.forEach((el, index) => {
+            el.innerText = data[index];
+        });
+    };
+
+    document.getElementById("btnStart").addEventListener("click", () => {
+        if (!intervalId) {
+            intervalId = setInterval(updateLetters, 2000);
+        }
+    });
+
+    document.getElementById("btnEnd").addEventListener("click", () => {
+        clearInterval(intervalId);
+        intervalId = null;
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Colour Queue</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            background: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+
+        .box-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: 200px;
+        }
+        .box{
+            width: 150px;
+            height: 100px;
+            margin: 10px;
+            /*background-color: #4CAF50;*/
+            text-align: center;
+            line-height: 100px;
+        }
+
+        /*.top{*/
+        /*    background-color: #ff0000;*/
+
+        /*}*/
+        /*.bottom{*/
+        /*    background-color: #006fff;*/
+
+
+        /*}*/
+        #val1{
+            background-color: #d3b1b1;
+        }
+        #val2{
+            background-color: #e45be8;
+        }
+        #val3{
+            background-color: #ff0000;
+        }
+        #val4{
+            background-color: #48da38;
+        }
+        #val5{
+            background-color: #2640e8;
+        }
+        #val6{
+            background-color: #ffcc00;
+        }
+        .bottom-wrapper{
+            display: flex;
+            justify-content: flex-end;
+        }
+        #startbtn{
+            background: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        #btn-panel{
+          position: absolute;
+          top: 700px;
+            left: 800px;
+        }
+        #endbtn{
+            background: #f44336;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<section>
+    <div class="box top" id="val1"></div>
+    <hr>
+    <div class="box-container">
+        <div class="box" id="val2"></div>
+        <div class="box" id="val3"></div>
+        <div class="box" id="val4"></div>
+        <div class="box" id="val5"></div>
+    </div>
+    <hr>
+    <div class="bottom-wrapper">
+        <div class="box bottom" id="val6"></div>
+    </div>
+
+</section>
+<section id="btn-panel">
+    <button type="button" id="startbtn">Start</button>
+    <button type="button" id="endbtn">End</button>
+</section>
+
+<script>
+   const colorIds = ["val1", "val2", "val3", "val4", "val5", "val6"];
+   const colors= ["#d3b1b1", "#e45be8", "#ff0000", "#48da38", "#2640e8", "#ffcc00"];
+   let intervalId = null;
+
+   function rotateColors() {
+       colors.unshift(colors.pop());
+       rendersColors();
+   }
+    function rendersColors() {
+        colorIds.forEach((id, index) => {
+            const element=document.getElementById(id);
+            if (element) {
+                element.style.backgroundColor=colors[index];
+            }
+        });
+    }
+
+    function startRotation(){
+       if (!intervalId) {
+           intervalId=setInterval(rotateColors, 1000);
+       }
+    }
+
+    function stopRotation(){
+       clearInterval(intervalId);
+       intervalId = null;
+    }
+    document.getElementById("startbtn").addEventListener("click", startRotation);
+   document.getElementById("endbtn").addEventListener("click", stopRotation);
+   rendersColors();
+</script>
+
+</body>
+</html>
